@@ -8,12 +8,7 @@ from handler import *
 # https://github.com/CubieDev/TwitchWebsocket
 
 def presshold(key):
-    start = time.time()
     set_given(num=key)
-    pyautogui.keyDown(key)
-    while time.time() - start < 1:
-        pyautogui.press(key)
-    pyautogui.keyUp(key)
 
 
 class Settings:
