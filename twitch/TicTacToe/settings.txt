@@ -1,0 +1,7 @@
+{
+    "Host": "irc.chat.twitch.tv",
+    "Port": 6667,
+    "Channel": "#cuboid404",
+    "Nickname": "CubeBot404",
+    "Authentication": "oauth:rvi4mv34a0c3yy0v21htc13udk5l0t"
+}
