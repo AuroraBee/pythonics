@@ -2,6 +2,15 @@
 import pygame
 import threading
 import time
+from pygame.constants import *
+
+
+def keydown(key):
+    pressed = pygame.key.get_pressed()
+    if pygame.key.get_focused():
+        if pressed[key]:
+            return 1
+
 
 scale = 3  # change the value to scale up the screen
 
@@ -14,7 +23,7 @@ pygame.draw.rect(screen, (255, 183, 52), (0, 0, 320 * scale, 18 * scale))
 
 pygame.display.flip()
 
-font = pygame.font.Font("SourceCodeVariable-Roman.ttf", 8)
+font = pygame.font.Font("../twitch/TicTacToe/SourceCodeVariable-Roman.ttf", 8)
 
 
 class flip(threading.Thread):

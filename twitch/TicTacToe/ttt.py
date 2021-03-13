@@ -1,18 +1,24 @@
 from ttt_lib import *
 from time import *
 
+
 # // TODO: Rewrite to fit bot framework
 
-def big():
-    return [69420, "Me Me Big Boi"]
+def goldenspot(fields):
+    if randint(0, 250) > 240:  # add golden block in a 1 in 5 chance
+        index = ai(fields)
+        fields[index] = "G"
+    return fields
+
 
 # seed(1010)
 def play():
-    infinity = big()[0]
     fields = [
         "-", "-", "-",
         "-", "-", "-",
         "-", "-", "-"]
+
+    fields = goldenspot(fields)
 
     # 7,8,9
     # 4,5,6
@@ -33,29 +39,24 @@ def play():
             turn = 0
     for i in range(900):
         pygame.event.pump()
-        print(fields[0], fields[1], fields[2])
-        print(fields[3], fields[4], fields[5])
-        print(fields[6], fields[7], fields[8])
-        if turn:
-            print("Turn O")
-        else:
-            print("Turn X")
         xx = 1
         while xx:
             if cw(fields) == 1:
                 fill_rect(0, 0, 320, 222, r)
                 ds(fields)
+                sound("loss")
                 raise Exception("AI won.")
             if cw(fields) == 2:
                 fill_rect(0, 0, 320, 222, g)
                 pygame.event.pump()
                 ds(fields)
+                sound("win")
                 raise Exception("Player won.")
             if sfi(fields) == []:
-                print("Draw!")
                 fill_rect(0, 0, 320, 222, ti)
                 pygame.event.pump()
                 ds(fields)
+                sound("tie")
                 raise Exception("Stalemate.")
             if tp:
                 print("---_---_---")
@@ -71,7 +72,6 @@ def play():
                     try:
                         pygame.event.pump()
                         t = smai(fields)
-                        print("--", t)
                         place = 0
                         if fields[t] == "-":
                             fields[t] = "X"
@@ -86,10 +86,10 @@ def play():
                             pygame.event.pump()
                             place = ai(fields)
                         except:
-                            print("Draw!")
                             fill_rect(0, 0, 320, 222, ti)
                             pygame.event.pump()
                             ds(fields)
+                            sound("tie")
                             raise Exception("Stalemate.")
             pygame.event.pump()
             place = inp(place)

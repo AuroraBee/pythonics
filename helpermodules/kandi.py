@@ -2,13 +2,22 @@
 import pygame
 import threading
 import time
-from helperModules import scaleTo
+from helpermodules.helperModules import scaleTo
+from pygame.constants import *
 
-scale = 3  # change the value to scale up the screen
 
-xSize = 320 # round(scaleTo(3, 5, 1980))
-ySize = 222 # round(scaleTo(3, 5, 1080))+1
+def keydown(key):
+    pressed = pygame.key.get_pressed()
+    if pygame.key.get_focused():
+        if pressed[key]:
+            return 1
+
+
+scale = 2  # change the value to scale up the screen
+
 yOffset = 1
+xSize = 320 # round(scaleTo(3, 5, 1980))
+ySize = 222 + yOffset # round(scaleTo(3, 5, 1080)) + yOffset
 
 pygame.init()
 # pygame.display.init()

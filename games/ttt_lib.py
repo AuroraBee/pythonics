@@ -1,6 +1,5 @@
 from random import *
 from pygame.constants import *
-from helpermodules.ion import *
 from helpermodules.kandi import *
 
 fields = [

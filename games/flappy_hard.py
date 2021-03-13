@@ -1,7 +1,6 @@
 from math import *
 from helpermodules.kandinsky import *
 from time import *
-from helpermodules.ion import *
 from random import *
 from pygame.constants import *
 

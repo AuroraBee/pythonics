@@ -1,10 +1,23 @@
 from random import *
-import pygame
+from playsound import playsound
+from helpermodules.kandi import *
+from helpermodules.image_drawer import *
 
-fields = [
-    "-", "-", "-",
-    "-", "-", "-",
-    "-", "-", "-"]
+
+def sound(type):
+    pygame.event.pump()
+    try:
+        if type == "tie":
+            sounds = ["tie1", "tie2"]
+            playsound("sounds/" + choice(sounds) + ".mp3", False)
+        if type == "loss":
+            sounds = ["loss1", "loss2", "loss3"]
+            playsound("sounds/" + choice(sounds) + ".mp3", False)
+        if type == "win":
+            sounds = ["win1", "win2"]
+            playsound("sounds/" + choice(sounds) + ".mp3", False)
+    except:
+        pass
 
 
 def sfi(fields):
@@ -29,21 +42,24 @@ def smai(fields):
             b = fields[pw[1]]
             c = fields[pw[2]]
 
+            if a == "G":
+                a = "X"
+            if b == "G":
+                b = "X"
+            if c == "G":
+                c = "X"
+
             if a == "X" or b == "X" or c == "X":
-                print("Att", pw, a, b, c)
                 if a == "X" and b == "X" and c != "X" and c != "O":
                     t = pw[2]
-                    print("Found 2-X, commencing Fortnite Dance.")
                     if fields[t] == "-":
                         return t
                 if a == "X" and c == "X" and b != "X" and b != "O":
                     t = pw[1]
-                    print("Found 2-X, commencing Fortnite Dance.")
                     if fields[t] == "-":
                         return t
                 if b == "X" and c == "X" and a != "X" and a != "O":
                     t = pw[0]
-                    print("Found 2-X, commencing Fortnite Dance.")
                     if fields[t] == "-":
                         return t
 
@@ -52,20 +68,23 @@ def smai(fields):
             b = fields[pw[1]]
             c = fields[pw[2]]
 
+            if a == "G":
+                a = "O"
+            if b == "G":
+                b = "O"
+            if c == "G":
+                c = "O"
+
             if a == "O" or b == "O" or c == "O":
-                print("Def", pw, a, b, c)
                 if a == "O" and b == "O" and c != "O" and c != "X":
-                    print("Blocking 2-O on", t)
                     t = pw[2]
                     if fields[t] == "-":
                         return t
                 if a == "O" and c == "O" and b != "O" and b != "X":
-                    print("Blocking 2-O on", t)
                     t = pw[1]
                     if fields[t] == "-":
                         return t
                 if b == "O" and c == "O" and a != "O" and a != "X":
-                    print("Blocking 2-O on", t)
                     t = pw[0]
                     if fields[t] == "-":
                         return t
@@ -79,25 +98,19 @@ def smai(fields):
                 if a == "X" or b == "X" or c == "X":
                     if a == "X" and c != "X" and c != "O" and b == "-":
                         t = choice([pw[2], pw[1]])
-                        print("Preping  to win")
                     if c == "X" and a != "X" and a != "O" and b == "-":
                         t = choice([pw[0], pw[1]])
-                        print("Performing randomness")
                     if b == "X" and a != "X" and a != "O" and c == "-":
                         t = choice([pw[2], pw[0]])
-                        print("Confusing human")
 
         if fields[t] == "O" or fields[t] == "X":
-            print("Spot taken")
             return ai(fields)
 
         if fields[t] == "-":
             return t
         else:
-            print("UwU, second empty check")
             return ai(fields)
     except:
-        print("AI Broke, prolly a draw.")
         return ai(fields)
 
 
@@ -132,17 +145,19 @@ def cw(fields):
     pygame.event.pump()
     pw = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
     for y in pw:
-        c = 0
+        XScore = 0
+        OScore = 0
         for x in y:
+            if fields[x] == "G":
+                XScore += 1
+                OScore += 1
             if fields[x] == "X":
-                c -= 1
+                XScore += 1
             if fields[x] == "O":
-                c += 1
-            if c == -3:
-                print("X Wins")
+                OScore += 1
+            if XScore == 3:
                 return 1
-            if c == 3:
-                print("O Wins")
+            if OScore == 3:
                 return 2
 
 
@@ -172,6 +187,28 @@ def getin():
             return 0
 
 
+def word(thing):
+    pygame.event.pump()
+    if thing == 1:
+        return "one"
+    if thing == 2:
+        return "two"
+    if thing == 3:
+        return "three"
+    if thing == 4:
+        return "four"
+    if thing == 5:
+        return "five"
+    if thing == 6:
+        return "six"
+    if thing == 7:
+        return "seven"
+    if thing == 8:
+        return "eight"
+    if thing == 9:
+        return "nine"
+
+
 def ds(fields):
     c = color(0, 0, 0)
     x1, x2, x3 = fields[0], fields[1], fields[2]
@@ -182,12 +219,20 @@ def ds(fields):
          [x8, 50, 100], [x9, 100, 100]]
 
     pygame.event.pump()
+    index = 0
     for i in x:
-        if i[0] == "-":
-            c = color(0, 80, 115)
-        if i[0] == "O":
-            c = color(50, 255, 50)
-        if i[0] == "X":
-            c = color(255, 50, 0)
+        index += 1
+        pygame.event.pump()
 
-        fill_rect(i[1] + int(320 / 3) - 20, i[2] + int(222 / 3) - 40, 45, 45, c)
+        thing = "error"
+
+        if i[0] == "-":
+            thing = word(index)
+        if i[0] == "O":
+            thing = "green"
+        if i[0] == "X":
+            thing = "red"
+        if i[0] == "G":
+            thing = "gold"
+
+        draw_image(thing, i[1] + int(320 / 3) - 20, i[2] + int(222 / 3) - 40)
