@@ -1,7 +1,20 @@
-from TwitchWebsocket import TwitchWebsocket
 import json
+import pyautogui
+import time
+from TwitchWebsocket import TwitchWebsocket
+from handler import *
+
 
 # https://github.com/CubieDev/TwitchWebsocket
+
+def presshold(key):
+    start = time.time()
+    set_given(num=key)
+    pyautogui.keyDown(key)
+    while time.time() - start < 1:
+        pyautogui.press(key)
+    pyautogui.keyUp(key)
+
 
 class Settings:
     def __init__(self, bot):
@@ -64,7 +77,26 @@ class MyBot:
     def message_handler(self, m):
         if m.type == "PRIVMSG":
             pass
-        print(m.user, ":", m.message)
+        msg = m.message
+        print(m.user, ":", msg)
+        if msg == "1" or msg == "!place 1":
+            presshold("1")
+        if msg == "2" or msg == "!place 2":
+            presshold("2")
+        if msg == "3" or msg == "!place 3":
+            presshold("3")
+        if msg == "4" or msg == "!place 4":
+            presshold("4")
+        if msg == "5" or msg == "!place 5":
+            presshold("5")
+        if msg == "6" or msg == "!place 6":
+            presshold("6")
+        if msg == "7" or msg == "!place 7":
+            presshold("7")
+        if msg == "8" or msg == "!place 8":
+            presshold("8")
+        if msg == "9" or msg == "!place 9":
+            presshold("9")
 
 
 if __name__ == "__main__":

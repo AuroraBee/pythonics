@@ -1,11 +1,14 @@
 from random import *
 from playsound import playsound
-from helpermodules.kandi import *
 from helpermodules.image_drawer import *
+from handler import *
+from time import *
 
 
 def sound(type):
     pygame.event.pump()
+    set_given("Game Off")
+
     try:
         if type == "tie":
             sounds = ["tie1", "tie2"]
@@ -14,8 +17,16 @@ def sound(type):
             sounds = ["loss1", "loss2", "loss3"]
             playsound("sounds/" + choice(sounds) + ".mp3", False)
         if type == "win":
-            sounds = ["win1", "win2"]
-            playsound("sounds/" + choice(sounds) + ".mp3", False)
+            sounds = ["win1", "win2", "secret"]
+            sound = choice(sounds)
+            if sound != "secret":
+                playsound("sounds/" + sound + ".mp3", False)
+            if sound == "secret":
+                draw_image("secret", 0, 0)
+                playsound("sounds/" + sound + ".mp3", False)
+                start = monotonic()
+                while monotonic() - start < 210:
+                    pygame.event.pump()
     except:
         pass
 
@@ -165,26 +176,26 @@ def getin():
     pygame.event.pump()
     while 1:
         pygame.event.pump()
-        if keydown(K_KP1):
+        given = read_given()
+        print(given)
+        if keydown(K_KP1) or keydown(K_7) or given == "7":
             return 1
-        if keydown(K_KP2):
+        if keydown(K_KP2) or keydown(K_8) or given == "8":
             return 2
-        if keydown(K_KP3):
+        if keydown(K_KP3) or keydown(K_9) or given == "9":
             return 3
-        if keydown(K_KP4):
+        if keydown(K_KP4) or keydown(K_4) or given == "4":
             return 4
-        if keydown(K_KP5):
+        if keydown(K_KP5) or keydown(K_5) or given == "5":
             return 5
-        if keydown(K_KP6):
+        if keydown(K_KP6) or keydown(K_6) or given == "6":
             return 6
-        if keydown(K_KP7):
+        if keydown(K_KP7) or keydown(K_1) or given == "1":
             return 7
-        if keydown(K_KP8):
+        if keydown(K_KP8) or keydown(K_2) or given == "2":
             return 8
-        if keydown(K_KP9):
+        if keydown(K_KP9) or keydown(K_3) or given == "3":
             return 9
-        if keydown(K_KP0):
-            return 0
 
 
 def word(thing):
