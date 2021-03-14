@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ad793af-b8fd-4d1c-bca5-650d25ab8e00" name="Default Changelist" comment="Finished Integration, now works en parallel.&#10;Run bot.py and ttt.py and then hook that up to twitch. E A S Y A S P I E">
+      <change afterPath="$PROJECT_DIR$/games/heks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpermodules/kandi.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpermodules/kandi.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,8 +159,8 @@
     <list>
       <item itemvalue="Python.bot" />
       <item itemvalue="Python.image_drawer" />
-      <item itemvalue="Python.ttt" />
       <item itemvalue="Python.ttt (1)" />
+      <item itemvalue="Python.ttt" />
       <item itemvalue="Python.ttt_lib" />
     </list>
     <recent_temporary>
@@ -222,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615623905030</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Finished Integration, now works en parallel.&#10;Run bot.py and ttt.py and then hook that up to twitch. E A S Y A S P I E">
+      <created>1615631503359</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1615631503359</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

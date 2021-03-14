@@ -13,11 +13,11 @@ def keydown(key):
             return 1
 
 
-scale = 2  # change the value to scale up the screen
+scale = 1  # change the value to scale up the screen
 
 yOffset = 1
-xSize = 320 # round(scaleTo(3, 5, 1980))
-ySize = 222 + yOffset # round(scaleTo(3, 5, 1080)) + yOffset
+xSize = round(scaleTo(3, 5, 1980))
+ySize = round(scaleTo(3, 5, 1080)) + yOffset
 
 pygame.init()
 # pygame.display.init()
